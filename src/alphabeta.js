@@ -61,3 +61,5 @@ function updateParent(node) {
     else
         parent.alpha = Math.max(parent.alpha, node.beta);
 }
+
+module.exports = alphaBetaPruning;
