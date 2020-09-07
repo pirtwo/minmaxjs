@@ -36,7 +36,7 @@ function alphaBetaPruning(rootNode, depthLimit = undefined) {
         }
     }
 
-    return currNode.value;
+    return currNode.getValue();
 }
 
 /**
