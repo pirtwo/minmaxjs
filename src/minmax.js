@@ -9,9 +9,9 @@ function minmax(rootNode, depthLimit = undefined) {
 
         if (currNode.visited || currNode.isTerminal() || currNode.depth >= depthLimit) {
             if (!currNode.visited) {
-                currNode.calcValue();
+                currNode.setValue(currNode.calcValue());
             }
-            if (parent) {
+            if (currNode.parent) {
                 updateParent(currNode);
             }
         } else {
