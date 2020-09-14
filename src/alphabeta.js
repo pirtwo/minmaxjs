@@ -1,5 +1,6 @@
 function alphaBetaPruning(rootNode, depthLimit = undefined) {
     let list = [],
+        pruned = [],
         currNode;
 
     list.push(rootNode);
@@ -16,19 +17,19 @@ function alphaBetaPruning(rootNode, depthLimit = undefined) {
                 // can set its value based on alpha and beta
                 currNode.setValue(
                     currNode.type === 'min' ?
-                    currNode.alpha :
-                    currNode.beta);
+                    currNode.beta :
+                    currNode.alpha);
             }
-
             if (currNode.parent) {
                 // update parent alpha and beta
                 updateParent(currNode);
 
                 // check for prune
-                if (canPrune(currNode)) {
-                    list.slice(list.indexOf(currNode));
+                if (canPrune(currNode.parent)) {
+                    pruned.push(...list.splice(list.indexOf(currNode.parent)));
                 }
             }
+
         } else {
             currNode.visited = true;
             list.push(currNode);
@@ -36,7 +37,10 @@ function alphaBetaPruning(rootNode, depthLimit = undefined) {
         }
     }
 
-    return currNode.getValue();
+    return {
+        value: currNode.getValue(),
+        pruned: pruned
+    }
 }
 
 /**
@@ -44,10 +48,10 @@ function alphaBetaPruning(rootNode, depthLimit = undefined) {
  */
 function canPrune(node) {
     let parent = node.parent;
-
-    return node.type === 'min' ?
-        node.beta < parent.alpha :
-        node.alpha > parent.beta;
+    if (parent)
+        return node.type === 'min' ? node.beta < parent.alpha : node.alpha > parent.beta;
+    else
+        return false;
 }
 
 /**
@@ -57,9 +61,9 @@ function updateParent(node) {
     let parent = node.parent;
 
     if (parent.type === 'min')
-        parent.beta = Math.min(parent.beta, node.alpha);
+        parent.beta = Math.min(parent.beta, node.value);
     else
-        parent.alpha = Math.max(parent.alpha, node.beta);
+        parent.alpha = Math.max(parent.alpha, node.value);
 }
 
 module.exports = alphaBetaPruning;
