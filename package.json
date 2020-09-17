@@ -1,13 +1,13 @@
 {
   "name": "minmaxjs",
   "version": "1.0.0",
-  "description": "",
+  "description": "small library including min-max and alpha-beta pruning algorithms.",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ahmad-Fz",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^26.4.2"
   }
