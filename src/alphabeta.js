@@ -59,7 +59,6 @@ function canPrune(node) {
  */
 function updateParent(node) {
     let parent = node.parent;
-
     if (parent.type === 'min')
         parent.beta = Math.min(parent.beta, node.value);
     else
