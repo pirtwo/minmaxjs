@@ -9,6 +9,7 @@ function minmax(rootNode, depthLimit = undefined) {
 
         if (currNode.visited || currNode.isTerminal() || currNode.depth >= depthLimit) {
             if (!currNode.visited) {
+                // node is a leaf or we reached depth limit
                 currNode.setValue(currNode.calcValue());
             }
             if (currNode.parent) {
