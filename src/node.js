@@ -1,4 +1,4 @@
-class Node {
+class MinmaxNode {
     constructor({
         type,
         state,
@@ -35,4 +35,4 @@ class Node {
     }
 }
 
-module.exports = Node;
+module.exports = MinmaxNode;
